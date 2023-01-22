@@ -1,0 +1,17 @@
+{
+  "projectName": "viteamplified",
+  "version": "3.1",
+  "frontend": "javascript",
+  "javascript": {
+    "framework": "react",
+    "config": {
+      "SourceDir": "src",
+      "DistributionDir": "dist",
+      "BuildCommand": "pnpm run build",
+      "StartCommand": "pnpm run dev"
+    }
+  },
+  "providers": [
+    "awscloudformation"
+  ]
+}
