@@ -12,6 +12,7 @@
     "test:ui": "vitest --ui"
   },
   "dependencies": {
+    "aws-amplify": "^5.0.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
