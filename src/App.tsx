@@ -5,6 +5,13 @@ import { CreateTodoInput, ListTodosQuery } from "./API";
 import { createTodo } from "./graphql/mutations";
 import { listTodos } from "./graphql/queries";
 import { getNonNullableList } from "./utils";
+import {
+  withAuthenticator,
+  Button,
+  Heading,
+  WithAuthenticatorProps,
+} from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
 
 interface FormState {
   name: string;
@@ -13,7 +20,7 @@ interface FormState {
 
 const initialState: FormState = { name: "", description: "" };
 
-const App = () => {
+const App = ({ signOut, user }: WithAuthenticatorProps) => {
   const [formState, setFormState] = useState(initialState);
   const [todos, setTodos] = useState<CreateTodoInput[]>([]);
 
@@ -49,8 +56,16 @@ const App = () => {
     }
   }
 
+  if (user == null) {
+    return <div style={styles.container}>Please sign in first</div>;
+  }
+
   return (
     <div style={styles.container}>
+      <Heading level={1}>Hello {user.username}</Heading>
+      <Button onClick={signOut} style={styles.button}>
+        Sign out
+      </Button>
       <h2>Amplify Todos</h2>
       <input
         onChange={(event) => setInput("name", event.target.value)}
@@ -105,4 +120,4 @@ const styles = {
   },
 } as const;
 
-export default App;
+export default withAuthenticator(App);
